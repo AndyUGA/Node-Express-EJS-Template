@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <section>
+        <form id="signup">
+            <label>Login</label>
+            <input type="text" name="login" />
+            <label>Password</label>
+            <input type="password" name="password" />
+            <button>Sign up</button>
+        </form>
+    </section>
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAnytn_6IMhsgFNwXlrOAqcmNvJqM6TuPM",
+            authDomain: "element-template.firebaseapp.com",
+            projectId: "element-template",
+            storageBucket: "element-template.appspot.com",
+            messagingSenderId: "914667935337",
+            appId: "1:914667935337:web:df74934e6e89e1795734f8"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        document
+            .getElementById("signup")
+            .addEventListener("submit", (event) => {
+                event.preventDefault();
+             
+                const login = event.target.login.value;
+                const password = event.target.password.value;
+                console.log(48, login);
+                console.log(49, password);
+
+                firebase
+                    .auth()
+                    .createUserWithEmailAndPassword(login, password)
+                    .then(({ user }) => {
+                     console.log(55, user);
+                    });
+            });
+    </script>
+
+</body>
+
+</html>
