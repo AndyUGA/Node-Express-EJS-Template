@@ -8,21 +8,33 @@ app.engine("html", require("ejs").renderFile);
 
 const serviceAccount = require("./key.json");
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+    credential: admin.credential.cert(serviceAccount)
 });
 
 const port = 3000;
 
 app.get('/', (req, res) => {
-  res.send('This is the homepage');
+    res.send('This is the homepage');
 })
 
 app.get('/signup', (req, res) => {
+    res.render("signup.ejs", {
+        testData: "This is some test data"
+    });
+})
+
+app.get('/login', (req, res) => {
     res.render("login.ejs", {
         testData: "This is some test data"
     });
-  })
+})
+
+app.get('/home', (req, res) => {
+    res.render("home.ejs");
+});
+
+
 
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`Example app listening at http://localhost:${port}`)
 })

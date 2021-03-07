@@ -6,26 +6,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 
 <body>
+    
 
+    <div id = "loginStatus">
 
-    <section>
-        <h3> Login Page </h3>
-        <form id="login">
-            <label>Login</label>
-            <input type="text" name="login" />
-            <label>Password</label>
-            <input type="password" name="password" />
-            <button>
-                Login
-            </button>
-        </form>
-    </section>
+    </div>
+    <button id="logout">
+        Logout
+    </button>
 
 
 
+    <script>
+        $("#logout").click(() => {
+            firebase.auth().signOut().then(() => {
+                console.log(24, "User has logged out!");
+            }).catch((error) => {
+                console.log(26, error);
+            });
+        });
+    </script>
 
     <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
@@ -42,23 +47,14 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
-        document
-            .getElementById("login")
-            .addEventListener("submit", (event) => {
-                event.preventDefault();
-             
-                const login = event.target.login.value;
-                const password = event.target.password.value;
-                console.log(48, login);
-                console.log(49, password);
-
-                firebase
-                    .auth()
-                    .signInWithEmailAndPassword(login, password)
-                    .then(({ user }) => {
-                     console.log(55, user);
-                    });
-            });
+        firebase.auth().onAuthStateChanged(function (user) {
+            if (user) {
+                console.log("User is signed in");
+                $("#loginStatus").append(`User is logged in`);
+            } else {
+                $("#loginStatus").append(`User is not logged in`);
+            }
+        });
     </script>
 
 </body>

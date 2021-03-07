@@ -12,15 +12,13 @@
 
 
     <section>
-        <h3> Login Page </h3>
-        <form id="login">
+        <h3> Signup Page </h3>
+        <form id="signup">
             <label>Login</label>
             <input type="text" name="login" />
             <label>Password</label>
             <input type="password" name="password" />
-            <button>
-                Login
-            </button>
+            <button>Sign up</button>
         </form>
     </section>
 
@@ -43,7 +41,7 @@
         firebase.initializeApp(firebaseConfig);
 
         document
-            .getElementById("login")
+            .getElementById("signup")
             .addEventListener("submit", (event) => {
                 event.preventDefault();
              
@@ -54,7 +52,7 @@
 
                 firebase
                     .auth()
-                    .signInWithEmailAndPassword(login, password)
+                    .createUserWithEmailAndPassword(login, password)
                     .then(({ user }) => {
                      console.log(55, user);
                     });
