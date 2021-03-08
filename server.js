@@ -6,10 +6,10 @@ const app = express();
 app.use(express.json());
 app.engine("html", require("ejs").renderFile);
 
-const serviceAccount = require("./key.json");
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
+// const serviceAccount = require("./key.json");
+// admin.initializeApp({
+//     credential: admin.credential.cert(serviceAccount)
+// });
 
 const port = 3000;
 
